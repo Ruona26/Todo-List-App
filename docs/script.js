@@ -103,7 +103,7 @@ function updateList() {
     let taskItem = document.createElement('li')
     
     tasks.forEach((task, index) => {   
-        taskItem.innerHTML = `<li class="flex justify-between items-center bg-gray-400 hover:bg-gray-500 rounded-sm w-100 px-3 py-1 my-2">
+        taskItem.innerHTML = `<li class="flex justify-between items-center bg-gray-400 hover:bg-gray-500 rounded-sm w-[90%] mx-auto px-3 py-1 my-2">
                 <div>
                     <input type="checkbox" class="checkbox peer accent-gray-900 cursor-pointer">
                     <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
@@ -113,8 +113,8 @@ function updateList() {
                     </label>
                 </div>
                 <div class="flex justify-between items-center gap-2"> 
-                    <p id=edit title="Edit-Task"><i class="fa-solid fa-pen-to-square cursor-pointer" ></i></p>
-                    <p id="delete" title="Delete Task"><i class="fa-solid fa-trash cursor-pointer" ></i></p>
+                    <p id=edit title="Edit-Task"><i class="fa-solid fa-pen-to-square cursor-pointer text-[16px]"></i></p>
+                    <p id="delete" title="Delete Task"><i class="fa-solid fa-trash cursor-pointer text-[16px]" ></i></p>
                 </div>
             </li>`;
     list.appendChild(taskItem);

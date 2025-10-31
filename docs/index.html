@@ -20,46 +20,72 @@
     
 </head>
 
-<body class="w-[100%] m-0 p-0 text-[16px]">
-    <div id="container" class="bg-[url('./images/Penwrite.jpg')] bg-cover bg-center min-h-screen flex flex-col items-center pt-4 gap-5 relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/75"></div>
+<body class=" m-0 p-0 text-[20px]">
+    <div id="container" class="bg-[url('./images/Penwrite.jpg')] bg-cover bg-center min-h-screen flex flex-col items-center pt-10 pb-10 gap-5 w-full">
+        <!-- Screen Dark Overlay -->
+        <div class="fixed inset-0 bg-black/75 pointer-events-none z-0"></div>
        
-        <div id="stats-container" class="flex justify-between items-center bg-[rgba(10,10,50,0.3)] rounded-md px-[2rem] py-[1.75rem] gap-6 z-10">
-            <div id="stats" class="w-[18rem]">
-                <h3 class="text-[2rem] text-white">Todo List</h3>
-                <p id="message" class="text-2xl"></p>
 
-                <div id="progress-bar"  class="w-[80%] rounded-full bg-gray-300 h-1.5 mt-10">
-                    <div id="progress"  class="w-[0%] h-1.5 bg-gray-600 rounded-full transition ease- duration-6000"></div>
+
+        <!-- Title and Stats Conatainer -->
+        <div id="stats-container" class="max-w-3xl w-[90%] md:w-[60%] lg:w-[50%] xl:w-[40%] mx-auto flex flex-col sm:flex-row 
+                justify-between items-center bg-[rgba(10,10,50,0.3)] rounded-md px-8 py-6 gap-6 z-10 text-center sm:text-left">
+            <div id="stats" class="flex-1 w-full sm:w-[18rem]">
+                <h3 class="text-[2rem] text-white z-10">Todo List</h3>
+
+                <div id="progress-bar"  class="w-[60%] rounded-full bg-gray-300 h-1.5 mt-10 mx-auto sm:w-full sm:mx-0">
+                    <div id="progress"  class="w-[0%] h-1.5 bg-gray-600 rounded-full transition-all duration-700 ease-in-out"></div>
                 </div>
             </div>
             
-            <div id="fraction" class="p-4 rounded-full text-2xl bg-gray-200">
-                <p class="text-gray-900">0/0</p>
+            <div id="fraction" class="p-4 rounded-full text-2xl bg-gray-200 shrink-0">
+                <p class="text-gray-900 font-medium">0/0</p>
             </div>
         </div>
 
-        <button id="add-task-btn" class="text-white text-2xl bg-[rgba(10,10,50,0.3)] p-3 cursor-pointer z-10 rounded-md hover:bg-[rgba(10,10,50,0.6)]">Add a Task</button>
 
-        <form  id="form"  class="flex flex-col items-start justify-center z-10 hidden gap-2 bg-[rgba(200,200,255,0.1)] px-4 py-7 rounded-md relative">
-            <button type="button" id="closeTaskBtn"  class="bg-[rgba(38,38,44,1)] rounded-md text-red-400 w-8 py-1 ml-[90%] cursor-pointer hover:bg-red-400 hover:text-black"><i class="fa-solid fa-xmark"></i></button>
-            <label for="titleInput" class="text-2xl text-white">Title</label>
-            <input type="text" placeholder="Enter Your Task" id="titleInput" value="" class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mb-4">
 
-            <label for="dateInput" class="text-2xl text-white">Date</label>
-            <input type="text" id="dateInput" value="" placeholder="Enter date"  class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mb-4">
+        <!-- The Add a Task Button -->
+        <button id="add-task-btn" class="block w-[10rem] sm:w-[11rem] my-5 mx-auto text-white text-2xl bg-[rgba(10,10,50,0.3)] 
+        p-3 cursor-pointer z-10 rounded-md hover:bg-gray-300 hover:text-[rgba(10,10,50,1)] hover:font-medium transition-all duration-300">Add a Task</button>
+    
 
-            <label for="descriptionInput" class="text-2xl text-white">Description</label>
-            <textarea type="text" placeholder="Enter Description" id="descriptionInput" cols="30" rows="5" value="" class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80"></textarea>
-            <p id="charCount" class="text-[1rem] text-gray-200">0 / 100</p>
-            <button id="btn" type="submit" class="bg-[rgba(38,38,44,1)] rounded-md text-green-400 hover:bg-green-400 hover:text-[rgba(38,38,44,1)] text-1xl px-3 py-2 w-20 mx-auto cursor-pointer"><i class="fa-solid fa-plus"></i></button>
+
+        <!-- Form Section -->
+        <form  id="form"  class="w-96 max-w-[90%] sm:w-96 mx-auto flex flex-col items-start justify-center z-10 gap-2 bg-[rgba(200,200,255,0.1)] 
+        px-4 py-7 rounded-md relative hidden">
+            <button type="button" id="closeTaskBtn"  class="bg-[rgba(38,38,44,1)] rounded-md text-red-400 w-8 py-1 ml-[90%] 
+            cursor-pointer hover:bg-red-400 hover:text-black transition-all duration-300"><i class="fa-solid fa-xmark"></i></button>
+            <label for="titleInput" class="text-white ml-4">Title</label>
+            <input type="text" placeholder="Enter Your Task" id="titleInput" value=""
+             class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mx-auto mb-4 max-w-full">
+
+            <label for="dateInput" class=" text-white ml-4">Date</label>
+            <input type="text" id="dateInput" value="" placeholder="Enter date"  
+            class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mx-auto mb-4 max-w-full">
+
+            <label for="descriptionInput" class=" text-white ml-4">Description</label>
+            <textarea type="text" placeholder="Enter Description" id="descriptionInput" cols="30" rows="3" value=""
+             class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mx-auto max-w-full"></textarea>
+            <p id="charCount" class="text-[1rem] text-gray-200 ml-4">0 / 100</p>
+            <button id="btn" type="submit" class="bg-[rgba(38,38,44,1)]  text-green-400 hover:bg-green-400 hover:text-[rgba(38,38,44,1)] 
+            text-1xl px-3 py-2 w-20 mx-auto cursor-pointer rounded-md transition-all duration-300"><i class="fa-solid fa-plus"></i></button>
         </form>
 
-        <ul id="taskLists" class="z-10 bg-[rgba(10,10,50,0.3)] rounded-md p-3 hidden">
-            <h2 class="text-white text-2xl">Task List</h2>
+
+
+        <!-- Task List Section -->
+        <ul id="taskLists" class="max-w-[90%] w-120 mx-auto z-10 bg-[rgba(10,10,50,0.3)] rounded-md px-1 pb-3 hidden">
+            <h2 class="text-white text-2xl text-center mb-4 mt-3">Task List</h2>
+            
         </ul>
-        <dialog id="dialog" class="bg-[rgba(220,220,220,0.9)] p-5 z-20 rounded-md absolute top-[40%] left-[40.8%]">
-            <p class="text-[1.6rem]" >Discard unsaved changes?</p>
+
+
+        
+        <!-- Dialog Box Section -->
+        <dialog id="dialog" class="bg-[rgba(220,220,220,0.9)] px-7 py-8 z-20 rounded-md w-96 max-w-[70%] 
+        fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop:bg-black/70">
+            <p class="text-[1.4rem] font-medium text-center" >Discard unsaved changes?</p>
             <div class="flex justify-between items-center mt-7">
                 <button id="cancelBtn"  class="cursor-pointer bg-[rgba(38,38,44,0.9)] p-2 text-[1.2rem] text-gray-200 rounded-md hover:bg-[rgba(38,38,44,1)]">Cancel</button>
                 <button id="discardBtn"  class="cursor-pointer bg-[rgba(38,38,44,0.9)] p-2 text-[1.2rem] text-gray-200 rounded-md hover:bg-[rgba(38,38,44,1)]">Discard</button>
