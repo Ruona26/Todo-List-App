@@ -88,11 +88,11 @@ function updateList() {
     
     tasks.forEach((task, index) => {   
         taskItem.innerHTML = `<li class="flex justify-between items-center bg-gray-400 hover:bg-gray-500 rounded-sm w-[90%] mx-auto px-3 py-1 my-2">
-                <div>
+                <div class="max-w-[65%]">
                     <input type="checkbox" class="checkbox peer accent-gray-900 cursor-pointer">
                     <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
-                        <p><span class="font-medium">Task:</span> ${title}</p>
-                        <p><span class="font-medium">Due Date:</span> ${date}</p>
+                        <p><span class="font-medium block md:inline lg:inline xl:inline">Task:</span> ${title}</p>
+                        <p><span class="font-medium block md:inline lg:inline xl:inline">Due Date:</span> ${date}</p>
                     </label>
                 </div>
                 <div class="flex justify-between items-center gap-2"> 

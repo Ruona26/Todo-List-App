@@ -9,6 +9,7 @@
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-amber-600: oklch(66.6% 0.179 58.318);
     --color-green-400: oklch(79.2% 0.209 151.711);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
@@ -448,11 +449,26 @@
   .max-w-3xl {
     max-width: var(--container-3xl);
   }
+  .max-w-7 {
+    max-width: calc(var(--spacing) * 7);
+  }
   .max-w-96 {
     max-width: calc(var(--spacing) * 96);
   }
+  .max-w-\[0\%\] {
+    max-width: 0%;
+  }
+  .max-w-\[40\%\] {
+    max-width: 40%;
+  }
   .max-w-\[60\%\] {
     max-width: 60%;
+  }
+  .max-w-\[65\%\] {
+    max-width: 65%;
+  }
+  .max-w-\[65\] {
+    max-width: 65;
   }
   .max-w-\[70\%\] {
     max-width: 70%;
@@ -542,6 +558,9 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-amber-600 {
+    border-color: var(--color-amber-600);
   }
   .bg-\[rgba\(10\,10\,50\,0\.3\)\] {
     background-color: rgba(10,10,50,0.3);
@@ -982,6 +1001,11 @@
       margin-inline: auto;
     }
   }
+  .sm\:block {
+    @media (width >= 40rem) {
+      display: block;
+    }
+  }
   .sm\:flex {
     @media (width >= 40rem) {
       display: flex;
@@ -1072,6 +1096,21 @@
       text-align: left;
     }
   }
+  .sm\:text-\[12px\] {
+    @media (width >= 40rem) {
+      font-size: 12px;
+    }
+  }
+  .sm\:text-\[16px\] {
+    @media (width >= 40rem) {
+      font-size: 16px;
+    }
+  }
+  .md\:inline {
+    @media (width >= 48rem) {
+      display: inline;
+    }
+  }
   .md\:w-96 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 96);
@@ -1118,6 +1157,11 @@
       font-size: 6px;
     }
   }
+  .lg\:inline {
+    @media (width >= 64rem) {
+      display: inline;
+    }
+  }
   .lg\:w-\[40\%\] {
     @media (width >= 64rem) {
       width: 40%;
@@ -1131,6 +1175,11 @@
   .lg\:w-\[60\%\] {
     @media (width >= 64rem) {
       width: 60%;
+    }
+  }
+  .xl\:inline {
+    @media (width >= 80rem) {
+      display: inline;
     }
   }
   .xl\:w-\[30\%\] {
