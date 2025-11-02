@@ -7,18 +7,32 @@ const list = document.getElementById("taskLists")
 let formBackdrop = document.getElementById("formBackdrop")
 let taskToEdit = null; 
 
+//Add a task Button
 const addTaskBtn = document.getElementById("add-task-btn")
 addTaskBtn.addEventListener('click', ()=> {
+    addTaskBtn.classList.add("hidden")
     form.classList.toggle('hidden')
-    taskLists.classList.add('hidden');
+    list.classList.add('hidden');
     formBackdrop.classList.remove("hidden")
 
 })
      
+//Local Storage
 function saveTasks(){
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+function loadTasks(){
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+        tasks.push(...JSON.parse(savedTasks));
+        updateList();
+        updateProgress();
+    } 
+}
+
+
+// Add/Plus button
 btn.addEventListener("click", (e)=> {
     e.preventDefault();
 
@@ -48,7 +62,8 @@ btn.addEventListener("click", (e)=> {
             task: {...taskDetails}
         };
         taskToEdit = null;
-        renderTask();
+        list.innerHTML = "";
+        updateList();
     }
     else {
     tasks.push({
@@ -66,9 +81,14 @@ btn.addEventListener("click", (e)=> {
     updateList();
 
         titleInput.value = "";
-        dateInput.value = "";
+        if(dateInput && dateInput._flatpickr) {
+        dateInput._flatpickr.clear();
+    }
 
+        dateInput.value = "";
+    
     formBackdrop.classList.add("hidden")
+     addTaskBtn.classList.remove("hidden")
 
     updateProgress()
     saveTasks();
@@ -78,21 +98,30 @@ btn.addEventListener("click", (e)=> {
 
 //Update List Function
 function updateList() {
+    
+    if(tasks.length > 0) {
+        list.classList.remove("hidden")     
+    }
+    else {
+        list.classList.add("hidden");
+    }
+    list.innerHTML = `<h2 class="text-white text-2xl text-center mb-4 mt-3">Task List</h2>`;
+
+
     let title = titleInput.value.trim(); 
       title = title.charAt(0).toUpperCase() + title.slice(1);
 
     let date = dateInput.value.trim();
 
-
-    let taskItem = document.createElement('li')
     
-    tasks.forEach((task, index) => {   
+    tasks.forEach((task, index) => { 
+        let taskItem = document.createElement('li')  
         taskItem.innerHTML = `<li class="flex justify-between items-center bg-gray-400 hover:bg-gray-500 rounded-sm w-[90%] mx-auto px-3 py-1 my-2">
                 <div class="max-w-[65%]">
                     <input type="checkbox" class="checkbox peer accent-gray-900 cursor-pointer">
                     <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
-                        <p><span class="font-medium block md:inline lg:inline xl:inline">Task:</span> ${title}</p>
-                        <p><span class="font-medium block md:inline lg:inline xl:inline">Due Date:</span> ${date}</p>
+                        <p><span class="font-medium block md:inline lg:inline xl:inline">Task:</span> ${task.task.title}</p>
+                        <p><span class="font-medium block md:inline lg:inline xl:inline">Due Date:</span> ${task.task.date}</p>
                     </label>
                 </div>
                 <div class="flex justify-between items-center gap-2"> 
@@ -102,8 +131,10 @@ function updateList() {
             </li>`;
     list.appendChild(taskItem);
 
+
         //For completed status
     const checkBox = taskItem.querySelector(".checkbox")
+    checkBox.checked = task.completed;
     checkBox.addEventListener("change", ()=>{
         task.completed = checkBox.checked;
         updateProgress()
@@ -120,7 +151,7 @@ function updateList() {
             tasks.splice(index, 1);
            }
            if(tasks.length === 0){
-            taskLists.classList.add('hidden');
+            list.classList.add('hidden');
            }
         }
         updateProgress()
@@ -131,24 +162,20 @@ function updateList() {
     const editBtn = taskItem.querySelector("#edit")
 
     editBtn.addEventListener("click", ()=> {
-        taskLists.classList.add('hidden');
-        titleInput.value = tasks[index].task.title
-        dateInput.value = tasks[index].task.date;
+        list.classList.add('hidden');
+        formBackdrop.classList.remove("hidden")
 
+        titleInput.value = task.task.title;
+        const savedDate = task.task.date || "";
+        if(dateInput && dateInput._flatpickr ) {
+            dateInput._flatpickr.setDate (savedDate, false);
+        }
+        else {
+        dateInput.value = savedDate;
+        }
 
         form.classList.remove("hidden")
          taskToEdit = index;
-        // btn.textContent = "Update"
-    /*const newText = prompt(`Edit your task: ${task.task}`);
-        if(newText === null) return;
-
-        const trimmedText = newText.trim();
-        if(!trimmedText) return;
-
-        tasks[index].title = trimmedText;
- 
-        const label = taskItem.querySelector(".label");
-        if(label) label.textContent = trimmedText;*/
    })
    saveTasks();
     })
@@ -156,41 +183,7 @@ function updateList() {
 }
 
 
-
-
-//renderTask
-  function renderTask () {
-    // list.innerHTML = "";
-
-    let title = titleInput.value.trim(); 
-      title = title.charAt(0).toUpperCase() + title.slice(1);
-
-    let date = dateInput.value.trim();
-
-
-    let taskItem = document.createElement('li')
-     tasks.forEach((task, index) => {   
-        taskItem.innerHTML = `<li class="flex justify-between items-center bg-gray-400 hover:bg-gray-500 rounded-sm w-100 px-3 py-1 my-2">
-                <div>
-                    <input type="checkbox" class="checkbox peer accent-gray-900 cursor-pointer">
-                    <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
-                        <p><span class="font-medium">Title:</span> ${title}</p>
-                        <p><span class="font-medium">Date:</span> ${date}</p>
-                    </label>
-                </div>
-                <div class="flex justify-between items-center gap-2"> 
-                    <p id=edit title="Edit-Task"><i class="fa-solid fa-pen-to-square cursor-pointer" ></i></p>
-                    <p id="delete" title="Delete Task"><i class="fa-solid fa-trash cursor-pointer" ></i></p>
-                </div>
-            </li>`;
-            
-
-     })
-     }
-
-
-
-//Progress Section
+//Progress Bar Section
 function updateProgress() {
     const total = tasks.length;
     const completed = tasks.filter(task =>
@@ -205,7 +198,7 @@ function updateProgress() {
     progressBar.style.width = `${progress}%`;}
 
   const fraction = document.getElementById("fraction");
-  fraction.textContent = `${completed}/${total}`;
+  fraction.innerHTML = `<p class="font-medium">${completed}/${total}</p>`;
 }
 
 
@@ -227,8 +220,9 @@ const discardBtn = document.getElementById("discardBtn")
         dialog.close();
         form.classList.toggle('hidden');
         formBackdrop.classList.add("hidden")
+        addTaskBtn.classList.remove("hidden")
 
-       if(tasks.length >= 1) {taskLists.classList.remove('hidden');}
+       if(tasks.length >= 1) {list.classList.remove('hidden');}
 
         titleInput.value = "";
         dateInput.value = "";
@@ -245,4 +239,6 @@ flatpickr("#dateInput", {
 });
 
 
+
+loadTasks();
 

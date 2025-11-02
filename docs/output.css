@@ -586,6 +586,15 @@
   .bg-\[rgba\(200\,200\,255\,0\.3\)\] {
     background-color: rgba(200,200,255,0.3);
   }
+  .bg-\[rgba\(200\,200\,255\,0\.07\)\] {
+    background-color: rgba(200,200,255,0.07);
+  }
+  .bg-\[rgba\(200\,200\,255\,0\.09\)\] {
+    background-color: rgba(200,200,255,0.09);
+  }
+  .bg-\[rgba\(200\,200\,255\,0\.15\)\] {
+    background-color: rgba(200,200,255,0.15);
+  }
   .bg-\[rgba\(220\,220\,220\,0\.9\)\] {
     background-color: rgba(220,220,220,0.9);
   }
@@ -599,6 +608,18 @@
     background-color: color-mix(in srgb, #000 0%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 0%, transparent);
+    }
+  }
+  .bg-black\/6 {
+    background-color: color-mix(in srgb, #000 6%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 6%, transparent);
+    }
+  }
+  .bg-black\/8 {
+    background-color: color-mix(in srgb, #000 8%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 8%, transparent);
     }
   }
   .bg-black\/60 {
@@ -625,10 +646,28 @@
       background-color: color-mix(in oklab, var(--color-black) 80%, transparent);
     }
   }
+  .bg-black\/86 {
+    background-color: color-mix(in srgb, #000 86%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 86%, transparent);
+    }
+  }
+  .bg-black\/88 {
+    background-color: color-mix(in srgb, #000 88%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 88%, transparent);
+    }
+  }
   .bg-black\/90 {
     background-color: color-mix(in srgb, #000 90%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 90%, transparent);
+    }
+  }
+  .bg-black\/96 {
+    background-color: color-mix(in srgb, #000 96%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 96%, transparent);
     }
   }
   .bg-gray-200 {
